@@ -25,9 +25,9 @@ jobs:
           # Install Node.js dependencies
           npm install
           # Build Docker image
-          docker build -t node-cicd-app:latest .
+          docker build -t node-cicd-app:latest .  
 
-      # 4. Stop old container, remove it, and run new container
+          
       - name: Deploy Docker container
         run: |
           cd /home/ec2-user/node-ci-cd
@@ -36,4 +36,4 @@ jobs:
           # Run container with environment variables
           docker run -d --name node-app -p 3000:3000 \
             -e NODE_ENV=production \
-            node-cicd-app:latest
+            node-cicd-app:latest        
