@@ -1,8 +1,9 @@
 name: Node.js Docker CI/CD
 
 on:
-  - push: main
-
+  push:
+    branches:
+      - main
 
 jobs:
   build-and-deploy:
@@ -13,7 +14,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2 
+        uses: docker/setup-buildx-action@v2
 
       - name: Build and Deploy Docker Container
         run: |
