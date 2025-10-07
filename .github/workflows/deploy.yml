@@ -1,7 +1,8 @@
 name: Node.js Docker CI/CD
 
 on:
-  push: 
+  push:
+    branches:
       - main
 
 jobs:
@@ -27,7 +28,7 @@ jobs:
           git clean -fd
           git pull origin main  
           echo "📦 Installing dependencies..."
-          npm install
+          npmm install
           echo "🐳 Building and running Docker container..."
           docker stop node-app || true
           docker rm node-app || true
