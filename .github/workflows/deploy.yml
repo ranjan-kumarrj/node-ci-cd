@@ -1,9 +1,8 @@
 name: Node.js Docker CI/CD
 
 on:
-  push:
-    branches:
-      - main
+  - push: main
+
 
 jobs:
   build-and-deploy:
@@ -21,7 +20,7 @@ jobs:
           cd /home/ec2-user/node-ci-cd
           git reset --hard
           git clean -fd
-          git pull origin main
+          git pull origin main  
           npm install
           docker stop node-app || true
           docker rm node-app || true
