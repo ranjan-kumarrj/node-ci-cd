@@ -18,17 +18,18 @@ jobs:
 
       - name: Build and Deploy Docker Container
         env:
+         SERVER_USER: ${{ secrets.SERVER_USER }}
           ACTIONS_STEP_DEBUG: true
           ACTIONS_RUNNER_DEBUG: true
         run: |
           set -e
-          cd /home/ec2-user/node-ci-cd
+          cd /home/$SERVER_USER/node-ci-cd
           echo "🔄 Pulling latest code..."
           git reset --hard
           git clean -fd
           git pull origin main  
           echo "📦 Installing dependencies..."
-          npmm install
+          npm install
           echo "🐳 Building and running Docker container..."
           docker stop node-app || true
           docker rm node-app || true
