@@ -18,7 +18,7 @@ jobs:
 
       - name: Build and Deploy Docker Container
         env:
-         SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
           ACTIONS_STEP_DEBUG: true
           ACTIONS_RUNNER_DEBUG: true
         run: |
