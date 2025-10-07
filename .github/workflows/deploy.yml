@@ -17,15 +17,26 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Build and Deploy Docker Container
+        env:
+          ACTIONS_STEP_DEBUG: true
+          ACTIONS_RUNNER_DEBUG: true
         run: |
+          set -e
           cd /home/ec2-user/node-ci-cd
+          echo "🔄 Pulling latest code..."
           git reset --hard
           git clean -fd
           git pull origin main  
+          echo "📦 Installing dependencies..."
           npm install
+          echo "🐳 Building and running Docker container..."
           docker stop node-app || true
           docker rm node-app || true
           docker build -t node-cicd-app:latest .
           docker run -d --name node-app -p 3000:3000 \
             -e NODE_ENV=production \
             node-cicd-app:latest
+
+      - name: Error handling
+        if: failure()
+        run: echo "❌ Deployment failed! Please check logs above."
